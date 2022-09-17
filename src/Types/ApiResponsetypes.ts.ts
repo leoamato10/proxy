@@ -1,4 +1,4 @@
-export interface RootObject {
+export interface MarvelHeroesListResponse {
     attributionHTML: string;
     attributionText: string;
     code:            number;
@@ -12,11 +12,11 @@ export interface RootObject {
     count:   number;
     limit:   number;
     offset:  number;
-    results: Result[];
+    results: Hero[];
     total:   number;
    }
    
-   export interface Result {
+   export interface Hero {
     comics:      Comics;
     description: string;
     events:      Comics;
@@ -33,11 +33,11 @@ export interface RootObject {
    export interface Comics {
     available:     number;
     collectionURI: string;
-    items:         ComicsItem[];
+    items:         Comic[];
     returned:      number;
    }
    
-   export interface ComicsItem {
+   export interface Comic {
     name:        string;
     resourceURI: string;
    }

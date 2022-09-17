@@ -1,11 +1,9 @@
 import { ApisauceInstance, create } from 'apisauce';
-import { createContext } from 'react';
-import { ApiRequestContextState, ContextStateUninitialized, MarvelData, MarvelResponse } from '../Types/Types';
-
+import { MarvelResponse } from '../Types/Types';
 
 
 export interface IActions {
-  paginate(): void;
+  paginate(goTo: string): void;
 }
 
 type ProxyHandler<T, P extends string> = {
@@ -17,16 +15,6 @@ type ProxyHandler<T, P extends string> = {
     receiver: any,
   ): boolean;
 };
-
-
-const initialState = {
-  isFetching: false,
-};
-
-export const ApiRequestContext = createContext<
-  [ApiRequestContextState<MarvelData>, IActions]
->([initialState as ContextStateUninitialized, { paginate: () => undefined }]);
-
 
 
 declare const Proxy: {
@@ -44,7 +32,6 @@ export const marvelProxy = new Proxy<MarvelResponse>(
 
       return new Promise<T>(async (resolve, reject) => {
         if (values.results.hasOwnProperty(url)) {
-          console.log('cache data');
           resolve(values.results[url] as T);
           return;
         }

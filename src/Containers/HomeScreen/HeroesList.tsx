@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ActivityIndicator, FlatList, View } from "react-native";
 import { Heroe } from "../../Components/Heroe";
-import { useCachedRequests } from "../../Context/CachedRequestsProvider";
+import { useCachedRequests } from "../../Context/HeroesProvider";
 
 
 function HeroesList() {

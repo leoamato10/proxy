@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { createContext } from 'react';
 import { useCallback, useContext, useEffect, useState } from "react";
-import { ApiRequestContext, IActions, marvelProxy } from './ProxyProvider';
-import { ApiRequestContextState, ContextStateFetched, ContextStateInitialized, MarvelData } from "../Types/Types";
-import { getAuthQueryStringParams, getPaginationQueryStringParams } from "./Helper";
+import { IActions, marvelProxy } from './Proxy';
+import { ApiRequestContextState, ContextStateFetched, ContextStateInitialized, ContextStateUninitialized, MarvelData } from "../Types/Types";
+import { getAuthQueryStringParams, getPaginationQueryStringParams } from "./Helpers";
+
 
 type Props = {
   url: string;
@@ -10,7 +11,18 @@ type Props = {
   children: JSX.Element;
 };
 
-export function CachedRequestsProvider({
+
+const initialState = {
+  isFetching: false,
+};
+
+
+const ApiRequestContext = createContext<
+  [ApiRequestContextState<MarvelData>, IActions]
+>([initialState as ContextStateUninitialized, { paginate: () => undefined }]);
+
+
+export function HeroesProvider({
   children,
   url,
   maxResultsPerPage,
@@ -21,6 +33,19 @@ export function CachedRequestsProvider({
   } as ContextStateInitialized);
 
   const [page, setPage] = useState(0);
+
+
+  const pagination = {
+    paginate(goTo: string) {
+      if (goTo === "nextPage") {
+        setPage(prevPage => prevPage + maxResultsPerPage)
+      } else {
+        if (page === 0) return
+        setPage(prevPage => prevPage - maxResultsPerPage)
+      }
+    },
+  }
+
 
   const getNavigatableUrl = useCallback((): string => {
     const newUrl = new URL(url);
@@ -37,55 +62,32 @@ export function CachedRequestsProvider({
     return res;
   }, [page, state]);
 
+
   useEffect(() => {
-    if (state.isFetching || !state.url) {
-      return;
-    }
+    if (state.isFetching || !state.url) return
 
     setState(
       state.url !== url
-        ? {
-          isFetching: true,
-          url,
-        }
-        : {
-          ...state,
-          isFetching: true,
-        },
+        ? { isFetching: true, page, url }
+        : { ...state, page, isFetching: true },
     );
 
     marvelProxy[getNavigatableUrl()].then((value) => {
       setState({
-        ...state,
-        isFetching: false,
-        data: {
-          ...(state.data ?? {}),
-          [url]: value,
-        },
+        ...state, isFetching: false, data: { ...(state.data ?? {}), [url]: value }
       } as ContextStateFetched<MarvelData>);
     });
   }, [page, url]);
 
+
   return (
-    <ApiRequestContext.Provider
-      value={[state,
-        {
-          paginate(next) {
-            if (next === "nextPage") {
-              setPage(prevPage => prevPage + 1)
-            } else {
-              if (page === 0) return
-              setPage(prevPage => prevPage - 1)
-            }
-          },
-        },
-      ]}>
+    <ApiRequestContext.Provider value={[state, pagination]}>
       {children}
     </ApiRequestContext.Provider>
   );
 }
 
+
 export const useCachedRequests = (): [ApiRequestContextState<MarvelData>, IActions] => {
   return useContext(ApiRequestContext);
 };
-
