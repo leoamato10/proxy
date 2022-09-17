@@ -18,17 +18,21 @@ export const Heroe = ({ char }: Props) => {
 
   const navigation = useNavigation<DetailScreenNavigationProp>();
   const imageUri = `https://${char.thumbnail.path.substring(7)}.${char.thumbnail.extension}`
-
+  const { name, comics } = char
+  const comicsNum = comics.returned
 
   return (
-    <View>
+    <View style={{ justifyContent: "center", alignContent: "center", alignItems: "center" }}>
       <TouchableOpacity style={styles.button}
         onPress={() => navigation.navigate('DetailScreen', { char })}
         activeOpacity={0.8}>
-        <Text>{char.name}</Text>
+        <View>
+          <Text style={{ fontSize: 20, textAlign: "center" }}>{name}</Text>
+        </View>
         <View style={styles.imageContainer}>
           <Image source={{ uri: imageUri }} style={styles.image} />
         </View>
+        <Text>Appears on {comicsNum} comics</Text>
       </TouchableOpacity>
     </View>
   );
@@ -50,14 +54,14 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.24,
     shadowRadius: 7,
     elevation: 9,
-    backgroundColor: "red"
+    paddingVertical: 15
   },
   button: {
     marginHorizontal: 2,
     paddingBottom: 20,
     paddingHorizontal: 7,
     marginTop: 10,
-    width: 150,
-    height: 200,
+    width: 180,
+    height: 250,
   }
 });

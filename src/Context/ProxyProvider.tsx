@@ -44,6 +44,7 @@ export const marvelProxy = new Proxy<MarvelResponse>(
 
       return new Promise<T>(async (resolve, reject) => {
         if (values.results.hasOwnProperty(url)) {
+          console.log('cache data');
           resolve(values.results[url] as T);
           return;
         }
@@ -57,7 +58,6 @@ export const marvelProxy = new Proxy<MarvelResponse>(
           }).apiInstance.get<T>(url);
           const { data } = response;
 
-
           // if (response.originalError?.response?.status !== 200 || !data) {
           //   throw new Error('Error fetching data');
           // }
@@ -69,7 +69,6 @@ export const marvelProxy = new Proxy<MarvelResponse>(
           }).results[url] = data;
 
           resolve(data);
-          return
         } catch (e) {
           reject(e);
         }

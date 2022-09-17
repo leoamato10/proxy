@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ActivityIndicator, FlatList, View } from "react-native";
 import { Heroe } from "../../Components/Heroe";
 import { useCachedRequests } from "../../Context/CachedRequestsProvider";
@@ -6,9 +6,9 @@ import { useCachedRequests } from "../../Context/CachedRequestsProvider";
 
 function HeroesList() {
   const [state, actions] = useCachedRequests();
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const results = state.data && state.data["/v1/public/characters"].data.results
-
 
   if (state.isFetching) {
     return (
@@ -18,12 +18,22 @@ function HeroesList() {
 
   const renderItem = ({ item }) => <Heroe char={item} />
 
+
   return (
     <View >
       <FlatList
         data={results}
         renderItem={renderItem}
-        onEndReached={actions.paginate}
+        onEndReachedThreshold={-0.1}
+        onRefresh={() => {
+          setIsRefreshing(true)
+          actions.paginate("prevPage")
+          setIsRefreshing(false)
+        }}
+        refreshing={isRefreshing}
+        onEndReached={() => {
+          if (state.isFetching === false) actions.paginate("nextPage")
+        }}
       />
     </View>
   );

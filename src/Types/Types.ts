@@ -1,8 +1,40 @@
 import { ApisauceInstance } from "apisauce";
 
 type MarvelHeroesListResponse = {
-  //TODO: tipar las respuestas de API para listado de héroes
+  comics:      Comics;
+    description: string;
+    events:      Comics;
+    id:          number;
+    modified:    string;
+    name:        string;
+    resourceURI: string;
+    series:      Comics;
+    stories?:     any;
+    thumbnail:   Thumbnail;
+    urls:        URL[];
 };
+
+ interface Comics {
+  available:     number;
+  collectionURI: string;
+  items:         ComicsItem[];
+  returned:      number;
+}
+ 
+ interface ComicsItem {
+  name:        string;
+  resourceURI: string;
+ }
+
+  interface Thumbnail {
+  extension: Extension;
+  path:      string;
+ }
+ 
+  enum Extension {
+  GIF = "gif",
+  Jpg = "jpg",
+ }
 
 type MarvelHeroComicsListResponse = {
   //TODO: tipar las respuestas de API para listado de cómics de un héroe
