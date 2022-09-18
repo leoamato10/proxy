@@ -22,11 +22,11 @@ const ApiRequestContext = createContext<
 >([initialState as ContextStateUninitialized, { paginate: () => undefined }]);
 
 
-export function HeroesProvider({
+export const HeroesProvider: React.FC<Props> = ({
   children,
   url,
   maxResultsPerPage,
-}: Props) {
+}) => {
   const [state, setState] = useState<ApiRequestContextState<MarvelData>>({
     isFetching: false,
     url,

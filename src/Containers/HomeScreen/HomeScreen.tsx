@@ -8,7 +8,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const resultsPerPage = 20
 
 
-const HomeScreen = () => {
+const HomeScreen: React.FC = () => {
 
   return (
     <SafeAreaView edges={['right', 'bottom', 'left']}

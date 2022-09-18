@@ -5,7 +5,8 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { UserProvider } from './Context/UserProvider';
 
 
-const App = () => {
+const App: React.FC = () => {
+
   return (
     <SafeAreaProvider>
       <UserProvider>

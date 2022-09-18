@@ -1,8 +1,12 @@
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import React from 'react'
 import Lottie from 'lottie-react-native';
 
-const Loader = ({ size = 200 }) => {
+interface Props {
+    size?: number
+}
+
+const Loader: React.FC<Props> = ({ size = 200 }) => {
     return (
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
             <Lottie

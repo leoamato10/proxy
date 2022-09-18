@@ -1,21 +1,16 @@
 import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParams } from '../Navigators/RootNavigator';
+import { Image, View } from 'react-native';
+import { Thumbnail } from '../Types/ApiResponsetypes.ts';
 import { styles } from './HeroPosterStyles';
 
 
-
-
 interface Props {
-  charImgData: "Movie";
+  charImgData: Thumbnail
 }
 
-export const HeroPoster = ({ charImgData }: Props) => {
+export const HeroPoster: React.FC<Props> = ({ charImgData }) => {
 
   const imageUri = `https://${charImgData.path.substring(7)}.${charImgData.extension}`
-
 
   return (
     <View>

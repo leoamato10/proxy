@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-    containerButton: { padding: 5, paddingBottom: 15 },
+    containerButton: { padding: 5, paddingBottom: 15},
     cardContainer: {
         flexDirection: "row",
         padding: 15,

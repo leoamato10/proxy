@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { FlatList, View } from "react-native";
+import { FlatList, ListRenderItem, View } from "react-native";
 import HeroeCard from "../../Components/HeroeCard";
 import Loader from "../../Components/Loader";
 import { useCachedRequests } from "../../Context/HeroesProvider";
+import { Hero } from "../../Types/ApiResponsetypes.ts";
 
 
 
-
-function HeroesList() {
+const HeroesList: React.FC = () => {
   const [state, actions] = useCachedRequests();
   const [isRefreshing, setIsRefreshing] = useState(false);
 
@@ -17,7 +17,7 @@ function HeroesList() {
   if (state.isFetching) return <Loader size={200} />
 
 
-  const renderItem = ({ item }) => <HeroeCard hero={item} />
+  const renderItem: ListRenderItem<Hero> = ({ item }) => <HeroeCard hero={item} />
 
 
   return (
