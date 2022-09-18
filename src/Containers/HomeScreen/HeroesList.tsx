@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { FlatList, View } from "react-native";
 import HeroeCard from "../../Components/HeroeCard";
+import Loader from "../../Components/Loader";
 import { useCachedRequests } from "../../Context/HeroesProvider";
-import Lottie from 'lottie-react-native';
-
 
 
 
@@ -15,19 +14,7 @@ function HeroesList() {
 
   const results = state.data && state.data["/v1/public/characters"].data.results
 
-  if (state.isFetching) {
-    return (
-      // <ActivityIndicator size={"large"} style={{ flex: 1 }} />
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Lottie
-          source={require('../../Assets/Animations/loading1.json')}
-          autoPlay
-          loop
-          style={{ width: 200 }}
-        />
-      </View>
-    );
-  }
+  if (state.isFetching) return <Loader size={200} />
 
 
   const renderItem = ({ item }) => <HeroeCard hero={item} />

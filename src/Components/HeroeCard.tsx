@@ -1,9 +1,10 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { Heroe } from './Heroe'
+import { HeroPoster } from './HeroPoster'
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParams } from '../Navigators/RootNavigator';
+import { styles } from './HeroCardStyles';
 
 
 type DetailScreenNavigationProp = NativeStackNavigationProp<
@@ -19,7 +20,7 @@ const HeroeCard = ({ hero }) => {
         <TouchableOpacity style={styles.containerButton}
             onPress={() => navigation.navigate('DetailScreen', { hero })}>
             <View style={styles.cardContainer}>
-                <Heroe charImgData={thumbnail} />
+                <HeroPoster charImgData={thumbnail} />
                 <View style={styles.textContainer}>
                     <Text style={[styles.text, { fontSize: 20, fontWeight: "bold" }]}>{name}</Text>
                     <Text style={styles.text}>Appears on {comicsNum} comics </Text>
@@ -31,22 +32,3 @@ const HeroeCard = ({ hero }) => {
 
 export default HeroeCard
 
-const styles = StyleSheet.create({
-    containerButton: { padding: 5, paddingBottom: 15 },
-    cardContainer: {
-        flexDirection: "row",
-        padding: 15,
-        backgroundColor: "black",
-        borderRadius: 18,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 10
-        },
-        shadowOpacity: 0.24,
-        shadowRadius: 7,
-        elevation: 9,
-    },
-    textContainer: { flex: 1, paddingVertical: 15, justifyContent: "space-between" },
-    text: { color: "white", textAlign: "center" }
-})
