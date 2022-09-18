@@ -1,5 +1,6 @@
 import React, { createContext } from 'react';
 import { useState } from "react";
+import { ActivityIndicator } from 'react-native';
 import { persistUserData, removeUserPersistedData } from './Helpers';
 
 
@@ -15,6 +16,7 @@ const UserContext = createContext("defaultValue");
 
 
 export function UserProvider({ children }: Props) {
+    const [loading, setLoading] = useState(false)
     const [user, setUser] = useState(initialUser)
 
 
@@ -28,7 +30,9 @@ export function UserProvider({ children }: Props) {
         setUser(null);
     }
 
-    const data = { user, login, logout }
+    if (loading) return <ActivityIndicator size={"large"} />
+
+    const data = { user, login, logout, setLoading }
 
     return (
         <UserContext.Provider value={data}>

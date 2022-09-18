@@ -5,14 +5,16 @@ import Login from '../Containers/LoginScreen/LoginScreen';
 import DetailScreen from '../Containers/DetailScreen/DetailScreen';
 import HomeScreen from '../Containers/HomeScreen/HomeScreen';
 import UserContext from '../Context/UserProvider';
-import { ActivityIndicator, Alert, Text, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, Alert, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Hero } from '../Types/ApiResponsetypes.ts';
+import { getLoginData } from '../Context/Helpers';
+import { styles } from './RootNavigatorStyle';
 
 
 export type RootStackParams = {
-  // HomeScreen: any;
-  // DetailScreen: { movie: Movie; filmCategory: string };
-  // WhishListScreen: any;
+  HomeScreen: any;
+  DetailScreen: { char: Hero };
 };
 
 
@@ -20,28 +22,22 @@ const Stack = createNativeStackNavigator<RootStackParams>();
 
 
 const RootNavigator = () => {
-  const [loading, setLoading] = useState(false)
   const { user, login, logout } = useContext(UserContext);
 
 
-  const getLoginData = async () => {
-    setLoading(true)
-
-    try {
-      const jsonValue = await AsyncStorage.getItem('@storage_Key')
-      const userCredentials = jsonValue != null ? JSON.parse(jsonValue) : null;
-      setLoading(false)
-      return login(userCredentials)
-    } catch (e) {
-      Alert.alert("Error reading login data")
-      setLoading(false)
-    }
-  }
-
   useEffect(() => {
-    getLoginData()
+    getLoginData(login)
   }, [])
 
+
+  const HeaderLeft = () => <Text style={styles.text}>Hi, Test</Text>
+  const HeaderRight = () => {
+    return (
+      <TouchableOpacity onPress={() => logout()}>
+        <Text style={styles.text}>Logout</Text>
+      </TouchableOpacity>
+    )
+  }
 
   const headerOptions = {
     headerStyle: {
@@ -54,17 +50,9 @@ const RootNavigator = () => {
       fontWeight: 'bold',
       fontSize: 23
     },
-    headerRight: () => {
-      return (
-        <TouchableOpacity onPress={() => logout()}>
-          <Text style={{ color: "white", fontWeight: "bold" }}>Logout</Text>
-        </TouchableOpacity>
-      )
-    }
+    headerRight: HeaderRight
   };
 
-
-  if (loading) return <ActivityIndicator size={"large"} />
 
   return (
     <NavigationContainer>
@@ -73,12 +61,15 @@ const RootNavigator = () => {
           <>
             <Stack.Screen
               name="HomeScreen"
-              options={{ title: 'Heroes' }}
+              options={{
+                title: 'Heroes', headerLeft: HeaderLeft
+              }}
+
               component={HomeScreen}
             />
             <Stack.Screen
               name="DetailScreen"
-              options={({ route }) => ({ title: route.params.char.name })}
+              options={({ route }) => ({ title: route.params.hero.name })}
               component={DetailScreen}
             />
           </>
@@ -96,3 +87,4 @@ const RootNavigator = () => {
 };
 
 export default RootNavigator;
+

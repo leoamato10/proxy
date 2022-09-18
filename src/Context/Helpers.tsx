@@ -32,6 +32,16 @@ export const persistUserData = async (userCredentials) => {
   }
 }
 
+export const getLoginData = async (login) => {
+  try {
+    const jsonValue = await AsyncStorage.getItem('@storage_Key')
+    const userCredentials = jsonValue != null ? JSON.parse(jsonValue) : null;
+    return login(userCredentials)
+  } catch (e) {
+    Alert.alert("Error reading login data")
+  }
+}
+
 export const removeUserPersistedData = async () => {
   try {
     await AsyncStorage.removeItem('@MyApp_key')

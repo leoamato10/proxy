@@ -8,10 +8,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 const HomeScreen = () => {
 
-
   return (
-    <SafeAreaView edges={['right', 'bottom', 'left']} style={{ flex: 1 }}>
-      <HeroesProvider maxResultsPerPage={3} url={Config.API_URL}>
+    <SafeAreaView edges={['right', 'bottom', 'left']} style={{ flex: 1, backgroundColor: "#ed1d24" }}>
+      <HeroesProvider maxResultsPerPage={30} url={Config.API_URL}>
         <HeroesList />
       </HeroesProvider>
     </SafeAreaView>
