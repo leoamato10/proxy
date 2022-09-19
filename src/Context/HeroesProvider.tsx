@@ -1,6 +1,6 @@
 import React, { createContext } from 'react';
 import { useCallback, useContext, useEffect, useState } from "react";
-import { IActions, marvelProxy } from './Proxy';
+import { IActions, marvelProxy } from '../Config/Proxy';
 import { ApiRequestContextState, ContextStateFetched, ContextStateInitialized, ContextStateUninitialized, MarvelData } from "../Types/Types";
 import { getAuthQueryStringParams, getPaginationQueryStringParams } from "./Helpers";
 

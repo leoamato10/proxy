@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Login from '../Containers/LoginScreen/LoginScreen';
+import LoginScreen from '../Containers/LoginScreen/LoginScreen';
 import DetailScreen from '../Containers/DetailScreen/DetailScreen';
 import HomeScreen from '../Containers/HomeScreen/HomeScreen';
 import UserContext from '../Context/UserProvider';
@@ -12,6 +12,7 @@ import { styles } from './RootNavigatorStyle';
 
 
 export type RootStackParams = {
+  Login: any;
   HomeScreen: any;
   DetailScreen: { hero: Hero };
 };
@@ -20,7 +21,7 @@ export type RootStackParams = {
 const Stack = createNativeStackNavigator<RootStackParams>();
 
 
-const RootNavigator = () => {
+const RootNavigator: React.FC = () => {
   const { user, login, logout } = useContext(UserContext);
 
 
@@ -74,9 +75,9 @@ const RootNavigator = () => {
           </>
           :
           <Stack.Screen
-            name="Login"
+            name="LoginScreen"
             options={{ headerShown: false }}
-            component={Login}
+            component={LoginScreen}
           />
         }
 

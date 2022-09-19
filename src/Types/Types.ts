@@ -3,11 +3,7 @@ import { Comic, Hero, MarvelHeroesListResponse } from "./ApiResponsetypes.ts";
 
 
 
-type MarvelHeroComicsListResponse = {
-  //TODO: tipar las respuestas de API para listado de cómics de un héroe
-};
-
-export type MarvelResponse = MarvelHeroesListResponse | MarvelHeroComicsListResponse;
+export type MarvelResponse = MarvelHeroesListResponse ;
 
 type MarvelHeroData = Array<Hero>; 
 type MarvelComicData = Array<Comic>;

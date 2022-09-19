@@ -18,7 +18,7 @@ type ProxyHandler<T, P extends string> = {
 
 
 declare const Proxy: {
-  new <T extends object>(
+  new <T extends Object>(
     target: { results: { [key in string]?: T }; apiInstance: ApisauceInstance },
     handler: ProxyHandler<T, string>,
   ): { [key: string]: Promise<T> };
@@ -30,6 +30,7 @@ export const marvelProxy = new Proxy<MarvelResponse>(
     get: function <T extends MarvelResponse>(target: { results: { [key in string]?: T } }, url: string) {
       const values = target;
 
+      // eslint-disable-next-line no-async-promise-executor
       return new Promise<T>(async (resolve, reject) => {
         if (values.results.hasOwnProperty(url)) {
           resolve(values.results[url] as T);

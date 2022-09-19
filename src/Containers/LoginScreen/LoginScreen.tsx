@@ -7,7 +7,7 @@ import { styles } from './LoginScreenStyles'
 
 const imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Marvel_Logo.svg/490px-Marvel_Logo.svg.png"
 
-const Login: React.FC = () => {
+const LoginScreen: React.FC = () => {
   const { login } = useContext(UserContext);
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -65,4 +65,4 @@ const Login: React.FC = () => {
   )
 }
 
-export default Login
+export default LoginScreen

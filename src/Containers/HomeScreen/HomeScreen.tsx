@@ -5,7 +5,7 @@ import { Config } from '../../Config'
 import { HeroesProvider } from '../../Context/HeroesProvider'
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const resultsPerPage = 20
+const resultsPerPage = 10
 
 
 const HomeScreen: React.FC = () => {

@@ -22,7 +22,7 @@ export function getPaginationQueryStringParams(maxResults: number, page: number)
   }
 }
 
-export const persistUserData = async (userCredentials) => {
+export const persistUserData = async (userCredentials): Promise<void> => {
   try {
     const jsonValue = JSON.stringify(userCredentials)
     await AsyncStorage.setItem('@storage_Key', jsonValue)
@@ -32,7 +32,7 @@ export const persistUserData = async (userCredentials) => {
   }
 }
 
-export const getLoginData = async (login) => {
+export const getLoginData = async (login): Promise<void> => {
   try {
     const jsonValue = await AsyncStorage.getItem('@storage_Key')
     const userCredentials = jsonValue != null ? JSON.parse(jsonValue) : null;
@@ -42,7 +42,7 @@ export const getLoginData = async (login) => {
   }
 }
 
-export const removeUserPersistedData = async () => {
+export const removeUserPersistedData = async (): Promise<void> => {
   try {
     await AsyncStorage.removeItem('@MyApp_key')
   } catch (e) {

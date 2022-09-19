@@ -5,20 +5,24 @@ import { persistUserData, removeUserPersistedData } from './Helpers';
 
 
 type Props = {
-    //   url: string;
-    //   maxResultsPerPage: number;
-    children: JSX.Element;
+    children: JSX.Element
 };
 
-const initialUser = null
+const initialState = {
+    user: null,
+    login: {},
+    logout: {},
 
-const UserContext = createContext("defaultValue");
+}
+
+const UserContext = createContext(initialState);
 
 
-export function UserProvider({ children }: Props) {
+export const UserProvider: React.FC<Props> = ({ children }) => {
     const [loading, setLoading] = useState(false)
-    const [user, setUser] = useState(initialUser)
+    const [user, setUser] = useState(null)
 
+    console.log('UserContext', UserContext);
 
     const login = (userCredentials) => {
         persistUserData(userCredentials)
