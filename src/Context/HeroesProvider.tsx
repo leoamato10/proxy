@@ -17,7 +17,7 @@ const initialState = {
 };
 
 
-const ApiRequestContext = createContext<
+export const ApiRequestContext = createContext<
   [ApiRequestContextState<MarvelData>, IActions]
 >([initialState as ContextStateUninitialized, { paginate: () => undefined }]);
 

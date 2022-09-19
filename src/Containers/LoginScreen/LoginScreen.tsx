@@ -54,6 +54,7 @@ const LoginScreen: React.FC = () => {
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity
+          accessibilityRole={'button'}
           onPress={handleLogin}
           style={styles.button}
         >

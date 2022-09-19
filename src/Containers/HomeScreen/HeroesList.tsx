@@ -23,6 +23,7 @@ const HeroesList: React.FC = () => {
   return (
     <View style={{ padding: 10 }}>
       <FlatList
+        testID="heroes-list"
         data={results}
         renderItem={renderItem}
         showsVerticalScrollIndicator={false}
