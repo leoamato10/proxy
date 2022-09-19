@@ -34,6 +34,7 @@ export const styles = StyleSheet.create({
       color: 'white',
       fontWeight: '700',
       fontSize: 16,
-    },
+  },
+    image: { width: 300, height: 100, marginBottom: 50 }
   
   })

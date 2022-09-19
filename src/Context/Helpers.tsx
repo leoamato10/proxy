@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert } from 'react-native';
+import { Login, UserCredentials } from './UserProvider';
 
 export function getAuthQueryStringParams(): {
   apikey: string;
@@ -22,7 +23,7 @@ export function getPaginationQueryStringParams(maxResults: number, page: number)
   }
 }
 
-export const persistUserData = async (userCredentials): Promise<void> => {
+export const persistUserData = async (userCredentials: UserCredentials): Promise<void> => {
   try {
     const jsonValue = JSON.stringify(userCredentials)
     await AsyncStorage.setItem('@storage_Key', jsonValue)
@@ -32,10 +33,10 @@ export const persistUserData = async (userCredentials): Promise<void> => {
   }
 }
 
-export const getLoginData = async (login): Promise<void> => {
+export const getLoginData = async (login: Login): Promise<void | null> => {
   try {
     const jsonValue = await AsyncStorage.getItem('@storage_Key')
-    const userCredentials = jsonValue != null ? JSON.parse(jsonValue) : null;
+    const userCredentials: UserCredentials = jsonValue != null ? JSON.parse(jsonValue) : null;
     return login(userCredentials)
   } catch (e) {
     Alert.alert("Error reading login data")

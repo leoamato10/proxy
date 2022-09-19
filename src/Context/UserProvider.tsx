@@ -8,10 +8,18 @@ type Props = {
     children: JSX.Element
 };
 
-const initialState = {
+export type UserCredentials = { email: string, password: string } | null
+export type Login = (userCredentials: UserCredentials) => void | null
+interface IState {
+    user: UserCredentials | null;
+    login: Login
+    logout: () => void | null;
+}
+
+const initialState: IState = {
     user: null,
-    login: {},
-    logout: {},
+    login: () => null,
+    logout: () => null,
 
 }
 
@@ -19,12 +27,11 @@ const UserContext = createContext(initialState);
 
 
 export const UserProvider: React.FC<Props> = ({ children }) => {
-    const [loading, setLoading] = useState(false)
-    const [user, setUser] = useState(null)
+    const [loading, setLoading] = useState<boolean>(false)
+    const [user, setUser] = useState<UserCredentials | null>(null)
 
-    console.log('UserContext', UserContext);
 
-    const login = (userCredentials) => {
+    const login = (userCredentials: UserCredentials) => {
         persistUserData(userCredentials)
         setUser(userCredentials);
     }

@@ -1,10 +1,11 @@
-import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { HeroPoster } from './HeroPoster'
+import { styles } from './HeroCardStyles';
+import { View, Text, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParams } from '../Navigators/RootNavigator';
-import { styles } from './HeroCardStyles';
+
+import { HeroPoster } from './HeroPoster'
 import { Hero } from '../Types/ApiResponsetypes.ts';
 
 
@@ -15,6 +16,7 @@ interface Props {
     hero: Hero
 }
 
+
 const HeroeCard: React.FC<Props> = ({ hero }) => {
     const navigation = useNavigation<DetailScreenNavigationProp>();
     const { name, comics, thumbnail } = hero
@@ -23,7 +25,7 @@ const HeroeCard: React.FC<Props> = ({ hero }) => {
     return (
         <TouchableOpacity style={styles.containerButton}
             activeOpacity={0.8}
-            onPress={() => navigation.navigate('DetailScreen', { hero })}>
+            onPress={() => navigation.navigate("DetailScreen", { hero })}>
             <View style={styles.cardContainer}>
                 <HeroPoster charImgData={thumbnail} />
                 <View style={styles.textContainer}>

@@ -1,12 +1,13 @@
 import React from 'react';
+import { styles } from './HeroPosterStyles';
 import { Image, View } from 'react-native';
 import { Thumbnail } from '../Types/ApiResponsetypes.ts';
-import { styles } from './HeroPosterStyles';
 
 
 interface Props {
   charImgData: Thumbnail
 }
+
 
 export const HeroPoster: React.FC<Props> = ({ charImgData }) => {
 

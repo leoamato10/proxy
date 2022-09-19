@@ -41,4 +41,15 @@ export const styles = StyleSheet.create({
       fontSize: 25,
       fontWeight: 'bold',
     },
-  });
+    container: { paddingRight: 10 },
+    content: {
+        padding: 15,
+        backgroundColor: 'lightgray',
+        borderRadius: 10,
+    },
+    text: { paddingHorizontal: 10 }
+});
+  
+
+
+

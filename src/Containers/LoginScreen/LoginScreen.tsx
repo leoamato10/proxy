@@ -33,7 +33,7 @@ const LoginScreen: React.FC = () => {
       style={styles.container}
       behavior="padding"
     >
-      <Image source={{ uri: imageUrl }} style={{ width: 300, height: 100, marginBottom: 50 }} />
+      <Image source={{ uri: imageUrl }} style={styles.image} />
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createNativeStackNavigator, NativeStackNavigationOptions } from '@react-navigation/native-stack';
 import LoginScreen from '../Containers/LoginScreen/LoginScreen';
 import DetailScreen from '../Containers/DetailScreen/DetailScreen';
 import HomeScreen from '../Containers/HomeScreen/HomeScreen';
@@ -12,7 +12,7 @@ import { styles } from './RootNavigatorStyle';
 
 
 export type RootStackParams = {
-  Login: any;
+  LoginScreen: any;
   HomeScreen: any;
   DetailScreen: { hero: Hero };
 };
@@ -39,7 +39,7 @@ const RootNavigator: React.FC = () => {
     )
   }
 
-  const headerOptions = {
+  const headerOptions: NativeStackNavigationOptions = {
     headerStyle: {
       backgroundColor: 'black'
     },

@@ -1,5 +1,5 @@
-import { View } from 'react-native'
 import React from 'react'
+import { View } from 'react-native'
 import Lottie from 'lottie-react-native';
 
 interface Props {

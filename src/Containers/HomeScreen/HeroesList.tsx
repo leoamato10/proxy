@@ -26,7 +26,7 @@ const HeroesList: React.FC = () => {
         data={results}
         renderItem={renderItem}
         showsVerticalScrollIndicator={false}
-        onEndReachedThreshold={-0.1}
+        onEndReachedThreshold={-0.2}
         onRefresh={() => {
           setIsRefreshing(true)
           actions.paginate("prevPage")
