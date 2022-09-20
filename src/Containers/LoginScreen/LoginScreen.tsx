@@ -22,7 +22,7 @@ const LoginScreen: React.FC = () => {
     } else {
       Alert.alert(
         "Credentials:",
-        "email: test@gmail.com & password: 12345678"
+        "Email: test@gmail.com   Password: 12345678"
       );
     }
 
@@ -37,6 +37,7 @@ const LoginScreen: React.FC = () => {
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
+          placeholderTextColor={"black"}
           value={email}
           autoCapitalize={"none"}
           textContentType={"emailAddress"}
@@ -45,6 +46,7 @@ const LoginScreen: React.FC = () => {
         />
         <TextInput
           placeholder="Password"
+          placeholderTextColor={"black"}
           value={password}
           onChangeText={text => setPassword(text)}
           style={styles.input}
