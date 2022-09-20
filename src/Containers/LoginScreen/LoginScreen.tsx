@@ -1,6 +1,7 @@
 
 import React, { useContext, useState } from 'react'
-import { Alert, Image, KeyboardAvoidingView, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Alert, Image, KeyboardAvoidingView, Text, TextInput, View } from 'react-native'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 import UserContext from '../../Context/UserProvider'
 import { styles } from './LoginScreenStyles'
 
@@ -54,7 +55,6 @@ const LoginScreen: React.FC = () => {
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-          accessibilityRole={'button'}
           onPress={handleLogin}
           style={styles.button}
         >
