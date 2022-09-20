@@ -1,7 +1,6 @@
 
 import React, { useContext, useState } from 'react'
-import { Alert, Image, KeyboardAvoidingView, Text, TextInput, View } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { Alert, Image, KeyboardAvoidingView, Text, TextInput, View, TouchableOpacity } from 'react-native'
 import UserContext from '../../Context/UserProvider'
 import { styles } from './LoginScreenStyles'
 
