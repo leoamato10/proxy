@@ -45,7 +45,7 @@ export const getLoginData = async (login: Login): Promise<void | null> => {
 
 export const removeUserPersistedData = async (): Promise<void> => {
   try {
-    await AsyncStorage.removeItem('@MyApp_key')
+    await AsyncStorage.removeItem('@storage_Key')
   } catch (e) {
     Alert.alert("Error erasing login data")
   }
